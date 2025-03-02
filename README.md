@@ -92,3 +92,6 @@ myProfile/
 ## 许可
 
 版权所有 © 2024 黄泓晋 
+
+![image](https://github.com/user-attachments/assets/f03612e3-6991-4533-9137-1c403eeada92)
+详见https://huanghongjin.netlify.app/
