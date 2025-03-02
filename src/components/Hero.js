@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Typography, Button, Grid, useTheme, useMediaQuery } from '@mui/material';
+import { Box, Container, Typography, Button, Grid, useTheme} from '@mui/material';
 import { motion } from 'framer-motion';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
