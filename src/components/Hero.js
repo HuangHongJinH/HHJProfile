@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Typography, Button, Grid, useTheme} from '@mui/material';
+import { Box, Container, Typography, Button, Grid, useTheme, Avatar } from '@mui/material';
 import { motion } from 'framer-motion';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -150,65 +150,26 @@ const Hero = () => {
                   borderRadius: '20px',
                   overflow: 'hidden',
                   boxShadow: '0 20px 40px rgba(0, 0, 0, 0.2)',
-                  background: theme.palette.mode === 'dark' 
-                    ? 'linear-gradient(135deg, #303f9f 0%, #1976d2 100%)' 
-                    : 'linear-gradient(135deg, #bbdefb 0%, #90caf9 100%)',
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
                   position: 'relative',
                 }}
               >
-                <Typography
-                  variant="h1"
-                  sx={{
-                    fontWeight: 900,
-                    fontSize: '12rem',
-                    opacity: 0.1,
-                    position: 'absolute',
-                    color: theme.palette.mode === 'dark' ? '#fff' : '#000',
-                  }}
-                >
-                  HHJ
-                </Typography>
                 <Box
+                  component="img"
+                  src="/lifePhoto.jpg"
+                  alt="黄泓晋生活照"
                   sx={{
-                    position: 'relative',
-                    zIndex: 1,
-                    textAlign: 'center',
-                    p: 4,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    transition: 'transform 0.5s ease',
+                    '&:hover': {
+                      transform: 'scale(1.05)',
+                    },
                   }}
-                >
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontWeight: 700,
-                      mb: 2,
-                      color: theme.palette.mode === 'dark' ? '#fff' : '#1565c0',
-                    }}
-                  >
-                    图神经网络
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontWeight: 700,
-                      mb: 2,
-                      color: theme.palette.mode === 'dark' ? '#fff' : '#1565c0',
-                    }}
-                  >
-                    集群鲁棒性评估
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontWeight: 700,
-                      color: theme.palette.mode === 'dark' ? '#fff' : '#1565c0',
-                    }}
-                  >
-                    网络安全
-                  </Typography>
-                </Box>
+                />
               </Box>
             </motion.div>
           </Grid>

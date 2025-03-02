@@ -77,6 +77,7 @@ const Footer = () => {
                   <Typography 
                     variant="body2" 
                     sx={{ 
+                      color: '#ffffff',
                       '&:hover': {
                         color: theme.palette.mode === 'dark' 
                           ? 'primary.main' 
