@@ -1,13 +1,68 @@
-import React from 'react';
-import { Box, Container, Typography, Button, Grid, useTheme} from '@mui/material';
+import React, { useEffect, useRef } from 'react';
+import { Box, Container, Typography, Button, Grid, useTheme, IconButton } from '@mui/material';
 import { motion } from 'framer-motion';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import { Link as ScrollLink } from 'react-scroll';
 
 const Hero = () => {
   const theme = useTheme();
+  const audioRef = useRef(null);
+  const [isMuted, setIsMuted] = React.useState(false);
+  const hasInteracted = useRef(false);
+
+  const tryPlayAudio = () => {
+    if (audioRef.current && !hasInteracted.current) {
+      audioRef.current.play().then(() => {
+        hasInteracted.current = true;
+        setIsMuted(false);
+      }).catch(e => {
+        console.log('Playback failed:', e);
+      });
+    }
+  };
+
+  useEffect(() => {
+    // 初始化音频设置
+    if (audioRef.current) {
+      audioRef.current.volume = 0.3;
+    }
+
+    // 添加页面滚动监听
+    const handleScroll = () => {
+      tryPlayAudio();
+    };
+
+    // 添加页面点击监听
+    const handleClick = () => {
+      tryPlayAudio();
+    };
+
+    // 添加监听器
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('click', handleClick);
+
+    // 清理监听器
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('click', handleClick);
+    };
+  }, []);
+
+  const toggleMute = () => {
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current.volume = 0.3;
+        audioRef.current.play().catch(console.error);
+      } else {
+        audioRef.current.volume = 0;
+      }
+      setIsMuted(!isMuted);
+    }
+  };
 
   return (
     <Box
@@ -25,6 +80,39 @@ const Hero = () => {
         pb: 6,
       }}
     >
+      <audio
+        ref={audioRef}
+        src="/spiritedAway.mp3"
+        preload="auto"
+        loop
+      />
+      
+      {/* 音量控制按钮 */}
+      <IconButton
+        onClick={toggleMute}
+        sx={{
+          position: 'fixed',
+          top: 100,
+          right: 20,
+          zIndex: 1000,
+          backgroundColor: theme.palette.mode === 'dark' 
+            ? 'rgba(255, 255, 255, 0.1)' 
+            : 'rgba(25, 118, 210, 0.1)',
+          backdropFilter: 'blur(5px)',
+          '&:hover': {
+            backgroundColor: theme.palette.mode === 'dark'
+              ? 'rgba(255, 255, 255, 0.2)'
+              : 'rgba(25, 118, 210, 0.2)',
+          },
+          color: theme.palette.mode === 'dark' ? 'white' : 'primary.main',
+          transition: 'all 0.3s ease',
+          transform: hasInteracted.current ? 'scale(1)' : 'scale(1.2)',
+        }}
+      >
+        {isMuted ? <VolumeOffIcon /> : <VolumeUpIcon />}
+      </IconButton>
+
+
       {/* Background decoration */}
       <Box
         sx={{
